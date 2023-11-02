@@ -29,7 +29,7 @@ const showCoffees = () => {
 };
 
 // ...
-
+document.addEventListener("DOMContentLoaded", showCoffees);
 if (navigator.serviceWorker) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -86,5 +86,4 @@ function getStream (type) {
     });
 }
 
-// Event-Listener für DOMContentLoaded außerhalb der vorherigen Funktionen platzieren
-document.addEventListener("DOMContentLoaded", showCoffees);
+
