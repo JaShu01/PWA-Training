@@ -1,8 +1,5 @@
 const container = document.querySelector(".container");
 
-
-
-
 document.addEventListener("DOMContentLoaded", showCoffees);
 
 function getUserMedia(constraints) {
@@ -52,15 +49,16 @@ function getStream(type) {
     });
 }
 
-// Event-Handler für die Button-Elemente
-document.querySelector('button[data-action="video"]').addEventListener('click', function () {
-  getStream('video');
-});
+function takePhoto() {
+  if (!('ImageCapture' in window)) {
+    alert('ImageCapture is not available');
+    return;
+  }
 
-document.querySelector('button[data-action="audio"]').addEventListener('click', function () {
-  getStream('audio');
-});
-
+  if (!theStream) {
+    alert('Grab the video stream first!');
+    return;
+  }
 
   var theImageCapturer = new ImageCapture(theStream.getVideoTracks()[0]);
 
@@ -72,4 +70,40 @@ document.querySelector('button[data-action="audio"]').addEventListener('click', 
     .catch(err => alert('Error: ' + err));
 }
 
+var theStream;
+
+function getStream() {
+  if (!navigator.getUserMedia && !navigator.webkitGetUserMedia &&
+    !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
+    alert('User Media API not supported.');
+    return;
+  }
+
+  var constraints = {
+    video: true
+  };
+
+  getUserMedia(constraints, function (stream) {
+    var mediaControl = document.querySelector('video');
+    if ('srcObject' in mediaControl) {
+      mediaControl.srcObject = stream;
+    } else if (navigator.mozGetUserMedia) {
+      mediaControl.mozSrcObject = stream;
+    } else {
+      mediaControl.src = (window.URL || window.webkitURL).createObjectURL(stream);
+    }
+    theStream = stream;
+  }, function (err) {
+    alert('Error: ' + err);
+  });
+}
+
+// Event-Handler für die Button-Elemente
+document.querySelector('button[data-action="video"]').addEventListener('click', function () {
+  getStream('video');
+});
+
+document.querySelector('button[data-action="audio"]').addEventListener('click', function () {
+  getStream('audio');
+});
 
