@@ -1,6 +1,6 @@
 const container = document.querySelector(".container");
 
-const coffees = [
+/*const coffees = [
   { name: "Perspiciatis", image: "images/coffee1.jpg" },
   { name: "Voluptatem", image: "images/coffee2.jpg" },
   { name: "Explicabo", image: "images/coffee3.jpg" },
@@ -28,7 +28,7 @@ const showCoffees = () => {
 
   container.innerHTML = output;
 };
-
+*/
 document.addEventListener("DOMContentLoaded", showCoffees);
 
 if (navigator.serviceWorker) {
