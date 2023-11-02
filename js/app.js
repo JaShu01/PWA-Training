@@ -29,8 +29,6 @@ const showCoffees = () => {
   container.innerHTML = output;
 };
 */
-document.addEventListener("DOMContentLoaded", showCoffees);
-
 if (navigator.serviceWorker) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -83,4 +81,7 @@ function getStream (type) {
     .catch(function (err) {
       alert('Error: ' + err);
     });
+document.addEventListener("DOMContentLoaded", showCoffees);
+
+
 }
