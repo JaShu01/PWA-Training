@@ -2,7 +2,7 @@ const container = document.querySelector(".container");
 
 
 
-document.addEventListener("DOMContentLoaded", showCoffees);
+
 
 
 function getUserMedia(constraints) {
