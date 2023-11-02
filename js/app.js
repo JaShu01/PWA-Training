@@ -4,14 +4,7 @@ const container = document.querySelector(".container");
 
 document.addEventListener("DOMContentLoaded", showCoffees);
 
-if (navigator.serviceWorker) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then(regEvent => console.log("Service worker registered!"))
-      .catch(err => console.log("Service worker not registered"));
-  });
-}
+
 
 function getUserMedia(constraints) {
   // if Promise-based API is available, use it
