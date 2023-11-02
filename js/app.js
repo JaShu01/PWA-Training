@@ -1,34 +1,7 @@
 const container = document.querySelector(".container");
 
-/*const coffees = [
-  { name: "Perspiciatis", image: "images/coffee1.jpg" },
-  { name: "Voluptatem", image: "images/coffee2.jpg" },
-  { name: "Explicabo", image: "images/coffee3.jpg" },
-  { name: "Rchitecto", image: "images/coffee4.jpg" },
-  { name: " Beatae", image: "images/coffee5.jpg" },
-  { name: " Vitae", image: "images/coffee6.jpg" },
-  { name: "Inventore", image: "images/coffee7.jpg" },
-  { name: "Veritatis", image: "images/coffee8.jpg" },
-  { name: "Accusantium", image: "images/coffee9.jpg" }
-];
+// ...
 
-const showCoffees = () => {
-  let output = "";
-
-  coffees.forEach(
-    ({ name, image }) =>
-      (output += `
-      <div class="card">
-        <img class="card--avatar" src=${image} />
-        <h1 class="card--title"> ${name} </h1>
-        <a class="card--link" href="#">Taste</a>
-      </div>
-    `)
-  );
-
-  container.innerHTML = output;
-};
-*/
 if (navigator.serviceWorker) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -36,6 +9,8 @@ if (navigator.serviceWorker) {
       .then(regEvent => console.log("Service worker registered!"))
       .catch(err => console.log("Service worker not registered"));
   });
+  
+  // Funktion getUserMedia und getStream hier ...
   function getUserMedia(constraints) {
   // if Promise-based API is available, use it
   if (navigator.mediaDevices) {
@@ -81,7 +56,7 @@ function getStream (type) {
     .catch(function (err) {
       alert('Error: ' + err);
     });
-document.addEventListener("DOMContentLoaded", showCoffees);
-
-
 }
+
+// Event-Listener für DOMContentLoaded außerhalb der vorherigen Funktionen platzieren
+document.addEventListener("DOMContentLoaded", showCoffees);
