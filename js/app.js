@@ -1,10 +1,6 @@
 const container = document.querySelector(".container");
 
-
-
 document.addEventListener("DOMContentLoaded", showCoffees);
-
-
 
 function getUserMedia(constraints) {
   // if Promise-based API is available, use it
@@ -52,12 +48,26 @@ function getStream(type) {
       alert('Error: ' + err);
     });
 }
-function getUserMedia(options, successCallback, failureCallback) {
-  var api = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  if (api) {
-    return api.bind(navigator)(options, successCallback, failureCallback);
+
+function takePhoto() {
+  if (!('ImageCapture' in window)) {
+    alert('ImageCapture is not available');
+    return;
   }
+
+  if (!theStream) {
+    alert('Grab the video stream first!');
+    return;
+  }
+
+  var theImageCapturer = new ImageCapture(theStream.getVideoTracks()[0]);
+
+  theImageCapturer.takePhoto()
+    .then(blob => {
+      var theImageTag = document.getElementById("imageTag");
+      theImageTag.src = URL.createObjectURL(blob);
+    })
+    .catch(err => alert('Error: ' + err));
 }
 
 var theStream;
@@ -68,7 +78,7 @@ function getStream() {
     alert('User Media API not supported.');
     return;
   }
-  
+
   var constraints = {
     video: true
   };
@@ -88,26 +98,6 @@ function getStream() {
   });
 }
 
-function takePhoto() {
-  if (!('ImageCapture' in window)) {
-    alert('ImageCapture is not available');
-    return;
-  }
-  
-  if (!theStream) {
-    alert('Grab the video stream first!');
-    return;
-  }
-  
-  var theImageCapturer = new ImageCapture(theStream.getVideoTracks()[0]);
-
-  theImageCapturer.takePhoto()
-    .then(blob => {
-      var theImageTag = document.getElementById("imageTag");
-      theImageTag.src = URL.createObjectURL(blob);
-    })
-    .catch(err => alert('Error: ' + err));
-
 // Event-Handler für die Button-Elemente
 document.querySelector('button[data-action="video"]').addEventListener('click', function () {
   getStream('video');
@@ -116,3 +106,4 @@ document.querySelector('button[data-action="video"]').addEventListener('click', 
 document.querySelector('button[data-action="audio"]').addEventListener('click', function () {
   getStream('audio');
 });
+
