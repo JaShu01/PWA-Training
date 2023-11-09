@@ -79,3 +79,15 @@ h1 {
   padding: 0.3rem 1rem;
   border-radius: 20px;
 }
+.container {
+  perspective: 300;
+  -webkit-perspective: 300;
+}
+
+#imgLogo {
+  width: 275px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding: 15px;
+}
