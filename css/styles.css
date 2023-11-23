@@ -91,3 +91,16 @@ h1 {
   display: block;
   padding: 15px;
 }
+
+.sidebar {
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
