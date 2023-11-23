@@ -158,12 +158,26 @@
       <p>Estimated usage is <b id="percent">unknown</b>%.</p>
       <p>Persistent storage status is <b id="persisted">unknown</b>.</p>
       <p><button onclick="requestPersistence()">Request persistent storage</button></p>
-      <p>Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
-      
-      <div id="target"></div>
-      <p><a href="welcome.html"><button> Return to welcome page </button></a></p>
-      <p><a href="battery.html"><button> Go to battery page </button></a></p>
-    
+     <div class="battery-container">
+    <span class="battery-icon">🔋</span>
+    <div class="progress">
+        <div id="batteryLevel" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <span id="batteryPercentage">0%</span>
+</div>
+<p>Estado: <span id="charging">desconocido</span></p>
+<p>Tiempo de Carga: <span id="chargingTime">desconocido</span></p>
+<p>Tiempo de Descarga: <span id="dischargingTime">desconocido</span></p>
+<p>Nivel de Batería: <span id="level">desconocido</span></p>
+
+
+<div id="target"></div>
+
+<ul id="target"></ul>
+    </main>
+    <script src="js/app.js"></script>
+    <p><a href="welcome.html"><button> Return to welcome page </button></a></p>
+    <p><a href="battery.html"><button> Go to battery page </button></a></p>
       
         
       
