@@ -122,6 +122,58 @@
           <img src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" id="imgLogo">
         </div>
         
+        <p>
+  <label>Engine</label>
+</p>
+<div role="group" id="selectEngine">
+<input type="radio" name="engine" value="localStorage" checked/> Persistent Storage
+<input type="radio" name="engine" value="sessionStorage"/> Per-Session Storage
+</div>
+
+<p>
+<label for="value">Value for <code>myKey</code></label>
+<input type="text" id="value">
+</p>
+
+<p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
+<div id="target"></div>
+
+      <div class="columns">
+  <div class="column">
+    <button class="btn-file">
+      Choose some files to read<br>(File API) <input type="file" onchange="readFiles(this.files)" multiple>
+    </button>
+    
+    <p>Number of selected files: <b id="count">N/A</b></p>
+  </div>
+  <div class="column">
+    <button class="btn-file" onclick="writeFile()">
+      Choose file to create or overwrite<br>(Native File System API)
+    </button>
+  </div>
+</div>
+      
+<p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
+<p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
+<p>Estimated usage is <b id="percent">unknown</b>%.</p>
+<p>Persistent storage status is <b id="persisted">unknown</b>.</p>
+<p><button onclick="requestPersistence()">Request persistent storage</button></p>
+<p>Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
+
+<div id="target"></div>
+
+<ul id="target"></ul>
+    </main>
+    <script src="js/app.js"></script>
+    <p><a href="welcome.html"><button> Return to welcome page </button></a></p>
+
+
+</body>
+  
+</html>
+          <img src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" id="imgLogo">
+        </div>
+        
         <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></p>
              
     </main>
