@@ -238,7 +238,7 @@ h1 {
 
 .battery-icon {
     margin-right: 10px;
-    font-size: 24px; /* Ajusta el tamaño según tus necesidades */
+    font-size: 34px; /* Ajusta el tamaño según tus necesidades */
 }
 
 .progress {
@@ -251,5 +251,5 @@ h1 {
 }
 
 .progress-bar {
-    background-color: blue; /* Color visible para la barra de progreso */
+    background-color: red; /* Color visible para la barra de progreso */
 }
