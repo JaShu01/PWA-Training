@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var date = document.getElementById('date').value;
     var category = document.getElementById('category').value;
     var amount = document.getElementById('amount').value;
+    var konto = document.getElementById('konto').value;
 
     // Eintrag als Objekt erstellen
     var entry = {
@@ -21,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
       date: date,
       category: category,
       amount: amount,
+      konto: konto-amount,
       id: Date.now() // Einzigartige ID basierend auf der aktuellen Zeit
+      
     };
 
     // Eintrag im Cache speichern
@@ -63,6 +66,7 @@ function displayEntries() {
           row.insertCell(1).textContent = entry.date;
           row.insertCell(2).textContent = entry.category;
           row.insertCell(3).textContent = entry.amount;
+          row.insertCell(3).textContent = entry.konto;
         });
       });
     });
