@@ -1,3 +1,5 @@
+const CACHE_NAME = 'entries-cache-v1';
+
 // Event-Listener hinzufügen, sobald das Dokument geladen ist
 document.addEventListener('DOMContentLoaded', function() {
   // Beim Laden der Seite die gespeicherten Einträge anzeigen
@@ -22,10 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
       id: Date.now() // Einzigartige ID basierend auf der aktuellen Zeit
     };
 
-    // Daten im LocalStorage speichern
-    var entries = JSON.parse(localStorage.getItem('entries') || '[]');
-    entries.push(entry);
-    localStorage.setItem('entries', JSON.stringify(entries));
+    // Eintrag im Cache speichern
+    saveEntryToCache(entry);
 
     // Formular zurücksetzen
     document.getElementById('cost-entry-form').reset();
@@ -35,32 +35,36 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Funktion zum Anzeigen der Einträge in einer Tabelle
-function displayEntries() {
-  var entries = JSON.parse(localStorage.getItem('entries') || '[]');
-  var tableBody = document.getElementById('entries-table-body');
+// Funktion zum Speichern eines Eintrags im Cache
+function saveEntryToCache(entry) {
+  const url = new URL(`/entry/${entry.id}`, location.href);
+  const response = new Response(JSON.stringify(entry), {
+    headers: { 'Content-Type': 'application/json' }
+  });
 
-  // Tabelle leeren
-  tableBody.innerHTML = '';
-
-  // Einträge in die Tabelle einfügen
-  entries.forEach(function(entry) {
-    var row = tableBody.insertRow();
-    row.insertCell(0).textContent = entry.description;
-    row.insertCell(1).textContent = entry.date;
-    row.insertCell(2).textContent = entry.category;
-    row.insertCell(3).textContent = entry.amount;
+  caches.open(CACHE_NAME).then(cache => {
+    cache.put(url, response);
   });
 }
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-      // Registrierung erfolgreich
-      console.log('Service Worker Registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // Registrierung fehlgeschlagen :(
-      console.log('Service Worker Registration failed: ', err);
+
+// Funktion zum Anzeigen der Einträge aus dem Cache
+function displayEntries() {
+  var tableBody = document.getElementById('entries-table-body');
+  tableBody.innerHTML = ''; // Tabelle leeren
+
+  caches.open(CACHE_NAME).then(cache => {
+    cache.keys().then(keys => {
+      keys.forEach(key => {
+        cache.match(key).then(response => {
+          return response.json();
+        }).then(entry => {
+          var row = tableBody.insertRow();
+          row.insertCell(0).textContent = entry.description;
+          row.insertCell(1).textContent = entry.date;
+          row.insertCell(2).textContent = entry.category;
+          row.insertCell(3).textContent = entry.amount;
+        });
+      });
     });
   });
 }
-
