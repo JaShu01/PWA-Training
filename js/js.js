@@ -1,42 +1,36 @@
 const CACHE_NAME = 'entries-cache-v1';
+let currentKontostand = 100; // Инициализация начального Kontostand
 
-// Event-Listener hinzufügen, sobald das Dokument geladen ist
 document.addEventListener('DOMContentLoaded', function() {
-  // Beim Laden der Seite die gespeicherten Einträge anzeigen
   displayEntries();
 
-  // Event-Listener für das Formular, um neue Kosten zu speichern
   document.getElementById('cost-entry-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Daten aus dem Formular holen
     var description = document.getElementById('description').value;
     var date = document.getElementById('date').value;
     var category = document.getElementById('category').value;
-    var amount = document.getElementById('amount').value;
-    var konto = document.getElementById('konto').value;
+    var amount = parseFloat(document.getElementById('amount').value); // Преобразовать значение в число
 
-    // Eintrag als Objekt erstellen
+    currentKontostand -= amount; // Вычитать сумму из текущего Kontostand
+
     var entry = {
       description: description,
       date: date,
       category: category,
       amount: amount,
-      konto: konto-amount,
-      id: Date.now() // Einzigartige ID basierend auf der aktuellen Zeit
-      
+      konto: currentKontostand, // Использовать обновленный Kontostand
+      id: Date.now()
     };
 
-    // Eintrag im Cache speichern
     saveEntryToCache(entry);
-
-    // Formular zurücksetzen
     document.getElementById('cost-entry-form').reset();
-
-    // Tabelle aktualisieren
     displayEntries();
   });
 });
+
+// ... оставшаяся часть кода без изменений
+
 
 // Funktion zum Speichern eines Eintrags im Cache
 function saveEntryToCache(entry) {
