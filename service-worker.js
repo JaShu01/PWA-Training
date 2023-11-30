@@ -1,11 +1,14 @@
-const CACHE_NAME = 'v1';
+const CACHE_NAME = 'v1'; // Erhöhe diese Nummer bei jeder Änderung am Service Worker oder am Cache-Inhalt
 const urlsToCache = [
   '/',
   '/index.html',
-  // Andere Ressourcen, die du cachen möchtest
+  // Füge hier weitere URLs hinzu, die du cachen möchtest
 ];
 
+// Installations-Event
 self.addEventListener('install', event => {
+  console.log('Service Worker installing. Version:', CACHE_NAME);
+
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -15,8 +18,12 @@ self.addEventListener('install', event => {
   );
 });
 
+// Aktivierungs-Event
 self.addEventListener('activate', event => {
+  console.log('Service Worker activating. Version:', CACHE_NAME);
+
   const cacheWhitelist = [CACHE_NAME];
+
   event.waitUntil(
     caches.keys().then(keyList => {
       return Promise.all(keyList.map(key => {
@@ -29,6 +36,7 @@ self.addEventListener('activate', event => {
   );
 });
 
+// Fetch-Event
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
