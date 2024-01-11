@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="sidebar">
-        <ul>
-            <li><a href="index.html">Battery Usage</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        <h1>Welcome</h1>
-    </div>
-    <script src="js/app.js"></script>
+
+<div class="column" ondrop="drop(event)" ondragover="allowDrop(event)" id="todo">
+    <h2>Aufgabe</h2>
+    <div class="card" draggable="true" ondragstart="drag(event)" id="task1">Kanban ausprobieren</div>
+    <div class="card" draggable="true" ondragstart="drag(event)" id="task2">Bunte Post-its kaufen</div>
+    <div class="card" draggable="true" ondragstart="drag(event)" id="task1">Mehr über Kanban lernen</div>
+    <div class="card" draggable="true" ondragstart="drag(event)" id="task2">Kanban-Tafel einweihen</div>
+</div>
+
+<div class="column" ondrop="drop(event)" ondragover="allowDrop(event)" id="inProgress">
+    <h2>Bearbeitung</h2>
+</div>
+
+<div class="column" ondrop="drop(event)" ondragover="allowDrop(event)" id="done">
+    <h2>Erledigt</h2>
+</div>
+
+
+<script src="jss/drag-n-drop.js"></script>
 </body>
 </html>
